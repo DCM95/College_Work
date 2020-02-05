@@ -1,0 +1,50 @@
+Invariables: 
+	AccountControl.currentUser != null
+
+Method Pseudocode & Pre/postconditions:
+
+
+Preconditions: 		N/A
+
+getAccess(accinfo){
+	boolean responseRecieved = ping FinancialAccount;
+	if (responseRecieved == false){
+		print error;
+		return;
+	}
+	else {
+		if (send accinfo == wrong_info){
+			error;
+		}
+		request accessKey;
+		recieve accessKey;
+		return accessKey;
+	}
+}
+
+Postconditions: 	N/A
+
+
+
+Preconditions: 		N/A
+
+getTransactions(accinfo, accessKey) {
+	boolean responseRecieved = ping FinancialAccount;
+	if (responseRecieved == false){
+		print error;
+		return;
+	}
+	else {
+		if (send accinfo == wrong_info){
+			error;
+		}
+		if (send access key == denied){
+			error;
+		}
+		request json_data;
+		recieve json_data;
+		return json_data;
+	}
+}
+
+Postconditions: 	N/A

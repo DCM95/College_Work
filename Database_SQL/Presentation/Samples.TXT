@@ -1,0 +1,45 @@
+http://www.sqlfiddle.com/
+
+Enter the bookstore_db_presentation into the website to test
+
+Queries used in presentation in order
+
+Show the total price *lastname1 firstname1* has paid for the books.
+
+Show the subject names of books supplied by *supplier2*.
+
+Show the name and price of the most expensive book supplied by
+     *supplier3*.
+
+Show the unique names of all books ordered by *lastname1
+     firstname1*.
+
+SELECT sum(bk.UnitPrice * ordd.Quantity) 
+	FROM db_book bk, db_order ord, db_customer cust, db_order_detail ordd
+	WHERE bk.BookID = ordd.BookID
+	AND ordd.OrderID = ord.OrderID
+	AND cust.CustomerID = ord.CustomerID
+	AND cust.FirstName = 'firstname1'
+	AND cust.LastName = 'lastname1';
+
+SELECT sub.CategoryName FROM db_book bk, db_subject sub, db_supplier sup
+	WHERE bk.SupplierID = sup.SupplierID
+	AND bk.SubjectID = sub.SubjectID
+	AND sup.CompanyName = 'supplier2';
+
+SELECT bk.UnitPrice, bk.Title FROM db_book bk, db_supplier sup
+	WHERE bk.SupplierID = sup.SupplierID
+	AND sup.CompanyName = 'supplier3'
+	AND bk.UnitPrice = 
+		(SELECT MAX(UnitPrice) 
+			FROM db_book bk, db_supplier sup
+			WHERE bk.SupplierID = sup.SupplierID
+			AND sup.CompanyName = 'supplier3'); 
+
+SELECT DISTINCT bk.Title 
+	FROM db_book bk, db_order ord, db_customer cust, db_order_detail ordd
+	WHERE bk.BookID = ordd.BookID
+	AND ordd.OrderID = ord.OrderID
+	AND cust.CustomerID = ord.CustomerID
+	AND cust.FirstName = 'firstname1'
+	AND cust.LastName = 'lastname1';
